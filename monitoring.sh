@@ -23,7 +23,7 @@ tcp_connections=$(ss | grep tcp | wc -l)
 users_total=$(who -u | awk '{print $1}' | sort | uniq | wc -l)
 ip=$(hostname -I)
 mac=$(ip addr show | grep  link/ether/ | awk '{print $2}')
-sudo_total=$(sudo grep sudo /var/log/auth.log | grep  COMMAND= | wc -l)
+sudo_total=$(journalctl _COMM=sudo | grep COMMAND | wc -l)
 
 wall "
 	#Architecture: $architecture
